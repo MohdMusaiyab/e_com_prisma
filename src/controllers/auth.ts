@@ -1,11 +1,18 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { hashSync, compareSync } from "bcrypt";
 import { prismaClient } from "..";
 import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../secrets";
-export const loginController = async (req: Request, res: Response) => {
+export const loginController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { email, password } = req.body;
+    // Here we can also use the schema beign used in schema/auth.ts with zod
+    // For example we can use the following code to validate the request body
+    // let user=await LoginSchema.parse(req.body)
     let user = await prismaClient.user.findFirst({
       where: {
         email: email,
@@ -33,10 +40,15 @@ export const loginController = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log(error);
+    next(error);
   }
 };
 
-export const registerController = async (req: Request, res: Response) => {
+export const registerController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { email, password, name } = req.body;
     let user = await prismaClient.user.findFirst({
@@ -64,5 +76,12 @@ export const registerController = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log(error);
+    next(error);
+
   }
+};
+
+export const me = async (req: Request, res: Response, next: NextFunction) => {
+  return res.json(req.user);
+  
 };
