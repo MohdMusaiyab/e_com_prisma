@@ -34,7 +34,8 @@ export const authMiddleware = async (
         });
       }
       // Now sicne the user is verified we need to assing the user in the request oject
-      req.user = user;
+
+      // req.body.user = user;
       next();
     } catch (error) {
       return res.status(401).json({

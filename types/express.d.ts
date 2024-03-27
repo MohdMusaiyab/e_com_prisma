@@ -1,8 +1,11 @@
-import express from "express";
-import { User } from "@prisma/client";
+// import express from "express";
+// import { User } from "@prisma/client";
 
-declare module "express" {
-  export interface Request {
-    user: User;
-  }
-}
+// // declare module "express" {
+// //   export interface Request {
+// //     user: User;
+// //   }
+// // }
+// export interface Request extends Request{
+//     user:User
+// }

@@ -1,9 +1,10 @@
 import { Router } from "express";
 import authRoutes from "./auth";
-
-const rootRouter:Router= Router();
+import productRoutes from "./product";
+import userRoutes from "./user";
+const rootRouter: Router = Router();
 
 rootRouter.use("/auth", authRoutes);
-
-export default rootRouter
-
+rootRouter.use("/product", productRoutes);
+rootRouter.use("/address", userRoutes);
+export default rootRouter;

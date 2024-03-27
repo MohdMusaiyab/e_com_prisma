@@ -82,6 +82,6 @@ export const registerController = async (
 };
 
 export const me = async (req: Request, res: Response, next: NextFunction) => {
-  return res.json(req.user);
+  // return res.json(req.user);
   
 };

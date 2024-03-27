@@ -20,6 +20,31 @@ model User{
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  addresses Address[]
 
   @@map("users")
+}
+model Product{
+  id Int @id @default(autoincrement())
+  name String
+  description String 
+  price Decimal
+  tags String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("products")
+}
+model Address{
+  id Int @id @default(autoincrement())
+  street String
+  city String
+  state String
+  zip String
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("addresses")
 }
